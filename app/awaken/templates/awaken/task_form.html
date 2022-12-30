@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input
+            class="btn-outline-success bg-dark"
+            value="save"
+            type="submit">
+        <input
+            class="btn-outline-secondary bg-dark"
+            value="cancel"
+            type="button"
+            onclick=location.href="{% url 'index' %}">
+    </form>
+</div>
+
+{% endblock %}

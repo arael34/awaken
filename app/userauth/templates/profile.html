@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<span>
+    logged in as {{ user.username }}
+    <input
+        value="logout"
+        type="button"
+        onclick=location.href="{% url 'logout' %}">
+</span>
+<br><br>
+<span>
+    daily points: {{ daily_points }}
+    weekly points: {{ weekly_points }}
+</span>
+<br><br>
+<div>
+    {{ graph_div | safe }}
+</div>
+
+{% endblock %}

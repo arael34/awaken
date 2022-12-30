@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form method="post" action="/complete/">
+    {% csrf_token %}
+    <ul>
+        {% for task in task_list %}
+        <li>
+            <div>
+                <span style="font-size: 23px;">{{ task.title }}:</span>
+                <span style="font-size: 20px;">{{ task.points }}</span>
+                <span style="font-size: 17px;">
+                    <input
+                        type="checkbox"
+                        name="task"
+                        value="{{ task.points }}" />
+                    <input
+                        class="btn-outline-secondary bg-dark"
+                        value="edit"
+                        type="button"
+                        onclick=location.href="{% url 'task-edit' task.id %}" />
+                    <input
+                        class="btn-outline-danger bg-dark"
+                        value="delete"
+                        type="button"
+                        onclick=location.href="{% url 'task-delete' task.id %}" />
+                </span>    
+            </div>
+        </li>
+        {% empty %}
+        <p>no tasks to display!</p>
+        {% endfor %}
+    </ul>
+
+    <div>
+        <p>points earned today: {{ points }}</p>
+    </div>
+
+    <span style="font-size: 17px">
+        <input
+            class="btn-outline-success bg-dark"
+            value="complete"
+            type="submit" />
+
+        <input
+            value="add a new task"
+            class="btn-outline-secondary bg-dark"
+            type="button"
+            onclick=location.href="{% url 'add' %}" />
+    </span>
+    
+</form>
+
+{% endblock %}
